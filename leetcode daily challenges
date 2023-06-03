@@ -1,6 +1,6 @@
 
 1376. Time Needed to Inform All Employees
-
+https://leetcode.com/problems/time-needed-to-inform-all-employees/description/
 class Solution {
 private:
     int dfs(int manager, std::vector<int>& informTime, std::unordered_map<int, std::vector<int>>& adjList) {
