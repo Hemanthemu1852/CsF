@@ -1,0 +1,23 @@
+BFS OF A GRAPH:
+clear intuition: 
+
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        // Code here visited array,queue,insert into queue look if its visited then skip 
+        vector<int> visited;//lets say this is the vector for bfs traversal
+        int visit[V]={0};
+        visit[0]=1;
+        queue<int> q;
+        q.push(0);
+        while(!q.empty())
+        {
+            int g=q.front();//here g signifies the node 
+            q.pop();
+            visited.push_back(g);
+        for(auto it:adj[g])
+        {if(!visit[it])
+        {
+            visit[it]=1;
+            q.push(it);
+        }} }
+        return visited;
+    }
