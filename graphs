@@ -21,3 +21,40 @@ vector<int> bfsOfGraph(int V, vector<int> adj[]) {
         }} }
         return visited;
     }
+
+DFS INORDER TRAVERSAL:
+LEETCODE DAIly challenge:
+Its my first solution which i have done on my own i feel very proud though it has a TC OF o(n2) I STILL feel proud about this 
+INTUITION:
+FIRSTLY INSERT THE ELEMENTS IN INORDER TRAVERSAL INTO THE VECTOR AND COMPUTE THE MINIMUM ABSOLUTE DIFFERENCE 
+class Solution {
+public:
+   vector<int>mindif;
+    void dfsinorder(TreeNode* node)
+    {
+        if(node==NULL)
+        return;
+        dfsinorder(node->left);
+        mindif.push_back(node->val);
+        dfsinorder(node->right);
+    }
+    int getMinimumDifference(TreeNode* root) {
+        if(root==NULL)
+        return 0;
+        dfsinorder(root);
+        int x=INT_MAX;
+        for(int i=0;i<mindif.size();i++)
+        {
+            {
+                for(int j=i+1;j<mindif.size();j++)
+                {
+                    int diff=abs(mindif[i]-mindif[j]);
+                    x=min(x,diff);
+                }
+            }
+           
+        }
+        return x;
+
+    }
+};
