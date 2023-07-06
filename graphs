@@ -1,3 +1,40 @@
+
+DETECT A CYCLE IN A GRAPH 
+ bool detect(int n,int vis[],vector<int>adj[])
+    {
+        vis[n]=1;
+        queue<pair<int,int>> q;
+        q.push({n,-1});
+        while(!q.empty())
+        {
+            int parent=q.front().second;//here front is the function so () should thhere for it 
+            int node=q.front().first;//not for first or second
+            q.pop();
+            for(auto adjnode:adj[node])
+            {
+                if(!vis[adjnode])
+            {
+                vis[adjnode]=1;
+                q.push({adjnode,node});//at this point node becomes the parent i.e q.seocnd
+                //and adjnode becomes the node or child sp this step is written 
+            }
+            else if(parent!=adjnode)    return true;
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        int vis[V]={0};
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])  
+            {  
+                if(detect(i,vis,adj))//noneed of [] beside adj or vis
+                    return true;
+            }
+        }
+        return false;
+    }
 BFS OF A GRAPH:
 clear intuition: 
 
