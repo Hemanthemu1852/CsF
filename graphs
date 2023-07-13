@@ -24,6 +24,44 @@ vector<vector<int>> updateMatrix(vector<vector<int>>& mat)
         return mat;
 	}   
 
+BIPARTITE GRAPH USAING DFS (COMPLETE THE NUMBER OF PROVINCES ALSO )
+private:
+    bool dfs(int node,int col,int color[],vector<int> adj[])
+    {
+        color[node]=col;
+        //traverse through the adjacent nodes 
+        for(auto it:adj[node])
+        {
+            //if they r uncoloured
+            if(color[it]==-1) 
+            {
+                if(dfs(it,!col,color,adj)==false)  return false; 
+            }
+            //if they are coloured with the same colour
+            else if(color[it]==col)
+                return false;
+        }
+        return true;
+    }
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    int color[V];
+	    for(int i=0;i<V;i++)
+	    {
+	        color[i]=-1;
+	    }
+	    //connected components
+	    for(int i=0;i<V;i++)
+	    {
+	        if(color[i]==-1)
+	        {
+	            if(dfs(i,0,color,adj)==false) return false; 
+	        }
+	    }
+	    return true;
+	}
+
+
 NUMBER OF DISTINCT ISLANDS:
 APPROACH : SAME DFS WITH CALLING 8 NEIGHBOURS AT ONCE AND ALSO MATRIX IS CHARACTER ONE BE CAREFUL
 
