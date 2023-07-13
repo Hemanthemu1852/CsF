@@ -24,6 +24,42 @@ vector<vector<int>> updateMatrix(vector<vector<int>>& mat)
         return mat;
 	}   
 
+DETECT CYCLE IN AN UNDIRECTED GRAPH :
+rivate:
+    bool checkdfs(int node,int vis[],int pathvis[],vector<int> adj[])
+    {
+        vis[node]=1;
+        pathvis[node]=1;
+        //traverse the adjacent nodes 
+        for(auto i:adj[node])
+        {
+            //check whether its visited or not 
+            if(!vis[i])
+            {
+                if(checkdfs(i,vis,pathvis,adj)==true) return true;
+            }
+            //check whether its path visited or not 
+            else if(pathvis[i])  return true;
+        }
+        pathvis[node]=0;
+        return false;
+    }
+    
+  public:
+    // Function to detect cycle in a directed graph.
+    bool isCyclic(int V, vector<int> adj[]) {
+        int vis[V]={0};
+        int pathvis[V]={0};
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+                if(checkdfs(i,vis,pathvis,adj)==true)  return true; 
+            }
+        }
+        return false;
+    }
+
 BIPARTITE GRAPH USAING DFS (COMPLETE THE NUMBER OF PROVINCES ALSO )
 private:
     bool dfs(int node,int col,int color[],vector<int> adj[])
