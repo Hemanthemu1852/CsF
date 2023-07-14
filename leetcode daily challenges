@@ -1,3 +1,22 @@
+https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/submissions/
+
+Given an integer array arr and an integer difference, return the length of the longest subsequence in arr which is
+an arithmetic sequence such that the difference between adjacent elements in the subsequence equals difference.
+
+A subsequence is a sequence that can be derived from arr by deleting some or no elements without changing the order of the remaining elements.
+int longestSubsequence(vector<int>& arr, int difference) {
+       unordered_map<int,int>m;
+       int mx=0;
+        for(int i=0;i<arr.size();i++){
+            int c=arr[i];
+            if(m.find(c-difference)!=m.end())
+            m[c]=m[c-difference]+1;
+            else
+            m[c]=1;
+            mx=max(mx,m[c]);
+        }
+        return mx;
+    }
 
 There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
 
