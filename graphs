@@ -24,6 +24,43 @@ vector<vector<int>> updateMatrix(vector<vector<int>>& mat)
         return mat;
 	}   
 
+
+TOPOLOGICAL SORTING 
+void dfs(int node,int vis[],stack<int> &st,vector<int> adj[])
+    {
+        vis[node]=1;
+        for(auto i:adj[node])
+        {
+            if(!vis[i])  
+            {
+                dfs(i,vis,st,adj);
+            }
+        }
+        //u shud push only that particular node not every node u traverse in dfs
+        st.push(node);
+    }
+	public:
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    int vis[V]={0};
+	    stack<int> st;
+	    for(int i=0;i<V;i++)
+	    {
+	        if(!vis[i])  
+	        {  
+	            dfs(i,vis,st,adj);
+	        }
+	    }
+	    vector<int> vec;
+	    while(!st.empty())
+	    {
+	        vec.push_back(st.top());
+	        st.pop();
+	    }
+	    return vec;
+	}
+
 DETECT CYCLE IN AN UNDIRECTED GRAPH :
 rivate:
     bool checkdfs(int node,int vis[],int pathvis[],vector<int> adj[])
