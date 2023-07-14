@@ -24,6 +24,42 @@ vector<vector<int>> updateMatrix(vector<vector<int>>& mat)
         return mat;
 	}   
 
+TOPO SORT USING KAHNS ALGORITHM 
+vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    int indegree[V]={0};  queue<int> q;  vector<int> ans;
+	    for(int i=0;i<V;i++)
+	    {
+	        for(auto it: adj[i])
+	        {
+	            indegree[it]++;
+	        }
+	    }
+	    for(int i=0;i<V;i++)
+	    {
+	        if(indegree[i]==0)
+	        {
+	            q.push(i);
+	        }
+	    }
+	    while(!q.empty())
+	    {
+	        //here nr is the node to be removed 
+	        int nr=q.front();
+	        q.pop();
+	        ans.push_back(nr);
+	        for(auto it: adj[nr])
+	        {
+	            indegree[it]--;
+	            if(indegree[it]==0)
+	            {
+	                q.push(it);
+	            }
+	        }
+	    }
+	    return ans;
+	}
+
 
 TOPOLOGICAL SORTING 
 void dfs(int node,int vis[],stack<int> &st,vector<int> adj[])
