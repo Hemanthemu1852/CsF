@@ -61,6 +61,47 @@ vector<int> topoSort(int V, vector<int> adj[])
 	}
 
 
+30/07/2023
+safe nodes : meaning the nodes whcih are terminal and all the edges attached to it lead to a terminal node 
+vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        vector<int> revlist[V];
+       int indegree[V]={0};
+        //i->it
+        //it->i
+        for(int i=0;i<V;i++)
+        {
+            for(auto it:adj[i])
+            {
+                revlist[it].push_back(i);
+                indegree[i]++;
+            }
+        }
+        queue<int> q;
+        vector<int> safenodes;
+        for(int i=0;i<V;i++)
+        {
+            //here it is the each individual element of the reversed list
+            if(indegree[i]==0)
+            {
+                q.push(i);
+            }
+        }
+        while(!q.empty())
+        {
+            int node=q.front();
+            q.pop();
+            safenodes.push_back(node);
+            for(auto it:revlist[node])
+            {
+                indegree[it]--;
+                //check for the indegree of it
+                if(indegree[it]==0) q.push(it);
+            }
+        }
+        sort(safenodes.begin(),safenodes.end());
+        return safenodes;
+    }
+
 TOPOLOGICAL SORTING 
 void dfs(int node,int vis[],stack<int> &st,vector<int> adj[])
     {
