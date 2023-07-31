@@ -59,8 +59,78 @@ vector<int> topoSort(int V, vector<int> adj[])
 	    }
 	    return ans;
 	}
+31/07/2023
+ALien Dictionary:
+Given a sorted dictionary of an alien language having N words and k starting alphabets of standard dictionary.
+Find the order of characters in the alien language.
+Note: Many orders may be possible for a particular test case, 
+thus you may return any valid order and output will be 1 if the order of string returned by the function is correct else 0 denoting incorrect string returned.
 
-
+If order isnt possible then there are 2 cases :
+case1: string s1 is lengthier than s2 with all letters matching 
+case 2: there is a directed graph edges(cyclic edge between the letters) like a before d ,d before b,and b before a
+vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    int indegree[V]={0};  queue<int> q;  vector<int> ans;
+	    for(int i=0;i<V;i++)
+	    {
+	        for(auto it: adj[i])
+	        {
+	            indegree[it]++;
+	        }
+	    }
+	    for(int i=0;i<V;i++)
+	    {
+	        if(indegree[i]==0)
+	        {
+	            q.push(i);
+	        }
+	    }
+	    while(!q.empty())
+	    {
+	        //here nr is the node to be removed 
+	        int nr=q.front();
+	        q.pop();
+	        ans.push_back(nr);
+	        for(auto it: adj[nr])
+	        {
+	            indegree[it]--;
+	            if(indegree[it]==0)
+	            {
+	                q.push(it);
+	            }
+	        }
+	    }
+	    return ans;
+	}
+    public:
+    string findOrder(string dict[], int N, int K) 
+    {
+        //code here
+        vector<int> list[K];
+        for(int i=0;i<N-1;i++)
+        {
+            string s11=dict[i];
+            string s12=dict[i+1];
+            int length=min(s11.size(),s12.size());
+            for(int i=0;i<length;i++)
+            {
+                if(s11[i]!=s12[i])
+                {
+                    list[s11[i]-'a'].push_back(s12[i]-'a');
+                    break;
+                }
+            }
+        }
+        //topo sort return a vector of integers but we need strings 
+        vector<int> topo=topoSort(K,list);
+        string answer="";
+        for(auto it: topo)
+        {
+            answer=answer+char(it+'a');
+        }
+        return answer;
+    }
 30/07/2023
 safe nodes : meaning the nodes whcih are terminal and all the edges attached to it lead to a terminal node 
 vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
