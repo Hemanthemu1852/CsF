@@ -59,7 +59,48 @@ vector<int> topoSort(int V, vector<int> adj[])
 	    }
 	    return ans;
 	}
+
+03/08/2023
+IMPLEMENTING DIJKSTRA'S ALGORITHM USING SET
+
+
+
+2/08/2023
+implementing dijkstra's algorithm 
+vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        //syntax of min heap 
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        vector <int> distance(V,1e9);
+        distance[S]=0;
+        pq.push({S,0});
+        while(!pq.empty())
+        {
+            int adjnode=pq.top().first;
+            int dist=pq.top().second;
+            pq.pop();
+            for(auto it:adj[adjnode])
+            {
+                // node,weight
+                int u=it[0];
+                int v=it[1];
+                //here adjnode is 0 initially,
+                if(dist+v<distance[u])
+                {
+                    //you have to upate the distance,as well as u have to push the thing into pq;
+                    distance[u]=dist+v;
+                    pq.push({u,dist+v});
+                }
+            }
+        }
+        return distance;
+        // Code here
+    }
+
 1/08/2023
+SHORTEST DISTANCE IN A DIRECTED ACYCLIC GRAPH:
+in a directed acyclic graph we use topological sorting 
+
 
 i have used pair in queues and i dint use the array,but made modifications in my vector twice,maybe that would be the minus,
 striver used an array,created the vector,updated it only once 
