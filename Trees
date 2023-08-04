@@ -1,0 +1,21 @@
+Binary tree representation:
+u r given a vector and its root node and u have to create a tree 
+void create_tree(node* root0, vector<int> &vec){
+        queue<node*> q;
+        q.push(root0); 
+        int i=1;/*declaraction*/ 
+        int n=vec.size();
+        while(i<n) // condition
+        {
+            //here node changes 
+            node *rn=q.front();
+            q.pop();
+            node* left=newNode(vec[i++]);//updation
+            rn->left=left;
+            q.push(left);
+            if(i>=n) break;
+            node* right=newNode(vec[i++]);//2nd updation 
+            rn->right=right;
+            q.push(right);
+        }
+    }
