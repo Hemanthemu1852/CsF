@@ -38,3 +38,76 @@ void create_tree(node* root0, vector<int> &vec){
             q.push(right);
         }
     }
+
+08/08/2023
+MORRIS INORDER TRAVERSAL TC -O(N),SC-O(1)
+vector<int> inOrder(Node* root) {
+        // Your code here
+        vector<int> inorder;
+        Node *curr=root;
+        while(curr!=NULL)
+        {
+            if(curr->left==NULL)
+            {
+                inorder.push_back(curr->data);
+                curr=curr->right;
+            }
+            //when curr->left is not null and if there exists a right go to the righmost
+            else
+            {
+            Node* prev=curr->left;
+            while(prev->right && prev->right!=curr)
+            {
+                prev=prev->right;
+            }
+            //once when the righmost guy becomes null connect it to the current 
+            if(prev->right==NULL)
+            {
+                prev->right=curr;
+                curr=curr->left;//then go to the left one after establishing a thread
+            }
+            //if  prev->right isnt null then it has to be connected to the currnt 
+            else{
+                prev->right=NULL;//cut the connection
+                inorder.push_back(curr->data);
+                curr=curr->right;//the go to the right 
+            }
+        }
+    }
+        return inorder;
+    }
+
+MORRIS PRE ORDER TRAVERSAL 
+vector <int> preorder(Node* root)
+{
+  // Your code here
+  Node *curr=root;   vector<int> preorder;
+  while(curr!=NULL)
+  {
+      if(curr->left==NULL)
+      {
+          preorder.push_back(curr->data);
+          curr=curr->right;
+      }
+      else
+      {
+          Node *prev=curr->left;
+          while(prev->right && prev->right!=curr)
+          {
+              prev=prev->right;
+          }
+          if(prev->right==NULL)
+          {
+              prev->right=curr;
+              preorder.push_back(curr->data);
+              curr=curr->left;
+          }
+          else
+          {
+              prev->right=NULL;
+              curr=curr->right;
+          }
+      }
+  }
+  return preorder;
+}
