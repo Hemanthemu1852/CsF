@@ -111,3 +111,35 @@ vector <int> preorder(Node* root)
   }
   return preorder;
 }
+RIGHT VIEW OF A TREE
+void recursion(Node *root,int level,vector<int> &v)
+{
+    if(root==NULL) return ;
+    if(level==v.size())  v.push_back(root->data);
+   recursion(root->right,level+1,v);
+   recursion(root->left,level+1,v);
+}
+vector<int> leftView(Node *root)
+{
+   vector<int > vec;
+   int level=0;
+   recursion(root,level,vec);
+   // Your code here
+   return vec;
+}
+LEFT VIEW 
+void recursion(Node *root,int level,vector<int> &v)
+{
+    if(root==NULL) return ;
+    if(level==v.size())  v.push_back(root->data);
+    recursion(root->left,level+1,v);
+    recursion(root->right,level+1,v);
+}
+vector<int> leftView(Node *root)
+{
+   vector<int > vec;
+   int level=0;
+   recursion(root,level,vec);
+   // Your code here
+   return vec;
+}
