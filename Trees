@@ -195,9 +195,84 @@ vector<int> topView(Node *root)
             
         }
         for(auto it:mp)
-        
         {
             v.push_back(it.second);
         }
         return v;
+    }
+
+
+VERTICAL ORDER TRAVERSAL
+
+GFG: optimum:
+vector<int> verticalOrder(Node *root)
+    {
+        //Your code here
+        map<int,vector<int>> mp; 
+        queue<pair<Node*,int>> q;
+        q.push({root,0});
+        while(!q.empty())
+         {
+           auto it=q.front();
+           q.pop();
+           Node *nodee=it.first;
+           int x=it.second;
+            //inserting into the multiset of the map
+            mp[x].push_back(nodee->data);
+            if(nodee->left)
+            {
+                q.push({nodee->left,x-1});
+            }
+            if(nodee->right)
+            {
+                q.push({nodee->right,x+1});
+            }
+         }
+        
+        vector<int> col;
+        for(auto it:mp)
+        {
+            
+            for(auto i:it.second)
+            {
+               col.push_back(i);
+            }
+            
+        }
+        return col;
+    }
+
+LEETCODE STRIVER
+map<int,map<int,multiset<int>>> mp; 
+        vector<vector<int>> answer;
+        queue<pair<TreeNode*,pair<int,int>>> q;
+        q.push({root,{0,0}});
+        while(!q.empty())
+        {
+           auto it=q.front();
+           q.pop();
+           TreeNode *nodee=it.first;
+           int x=it.second.first;
+            int y=it.second.second;
+            //inserting into the multiset of the map
+            mp[x][y].insert(nodee->val);
+            if(nodee->left)
+            {
+                q.push({nodee->left,{x-1,y+1}});
+            }
+            if(nodee->right)
+            {
+                q.push({nodee->right,{x+1,y+1}});
+            }
+        }
+        for(auto it:mp)
+        {
+            vector<int> col;
+            for(auto i:it.second)
+            {
+                col.insert(col.end(),i.second.begin(),i.second.end());
+            }
+            answer.push_back(col);
+        }
+        return answer;
     }
