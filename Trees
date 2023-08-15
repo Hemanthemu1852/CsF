@@ -276,3 +276,34 @@ map<int,map<int,multiset<int>>> mp;
         }
         return answer;
     }
+
+
+LEVE ORDER TRAVERSAL IS DONE 
+here is the ZIGZAG TRAVERSAL 
+same as level as level order traversal but u use a flag when its true LtoR false: Rto L
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> zigzag;
+        if(root==NULL) return zigzag;
+        queue<TreeNode*> q;
+        bool LefttoRight=true;
+        q.push(root);
+        while(!q.empty())
+        {
+            int size=q.size();
+            vector<int> level(size);
+            for(int i=0;i<size;i++)
+            {
+                TreeNode* node=q.front();
+                q.pop();
+                //if its from RtoL then with increasing i value index decreases and we are following RtoL order 
+                int index=(LefttoRight)? i : size-i-1;
+                level[index]=node->val;
+                if(node->left) q.push(node->left);
+                if(node->right)  q.push(node->right);
+            }
+            zigzag.push_back(level);
+            LefttoRight=!LefttoRight;
+            
+        }
+    return zigzag;
+    }
