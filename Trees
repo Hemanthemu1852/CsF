@@ -333,3 +333,31 @@ vector <int> zigZagTraversal(Node* root)
         }
     return zigzag;
     }
+
+
+MAX HEIGHT 
+int maxDepth(TreeNode* root) {
+        if(root==NULL) return 0;
+        int lh=maxDepth(root->left);
+        int rh=maxDepth(root->right);
+        return 1+max(lh,rh);
+    }
+
+FINDING THE DIAMETER
+private: 
+int findheight(TreeNode* node,int &diameter)
+{
+    if(node==NULL)  return 0;
+    int lh= findheight(node->left,diameter);
+    int rh=findheight(node->right,diameter);
+    //we are using the left height and right height's sum to calc diameter so if this function doesnt return the height then there's no point in writing the fucntion
+    diameter=max(diameter,lh+rh);
+    return 1+max(lh,rh);
+    //height is 1+max(lh,rh)
+}
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        int diameter=INT_MIN;
+        findheight(root,diameter);
+        return diameter; 
+    }
