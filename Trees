@@ -307,3 +307,29 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         }
     return zigzag;
     }
+return in a single vector
+vector <int> zigZagTraversal(Node* root)
+    {
+        vector<int> zigzag;
+        if(root==NULL) return zigzag;
+        queue<Node*> q;
+        bool LefttoRight=true;
+        q.push(root);
+        while(!q.empty())
+        {
+            int size=q.size();
+            for(int i=0;i<size;i++)
+            {
+                Node* node=q.front();
+                q.pop();
+                //if its from RtoL then with increasing i value index decreases and we are following RtoL order 
+                int index=(LefttoRight)? i : size-i-1;
+                zigzag[index]=node->data;
+                if(node->left) q.push(node->left);
+                if(node->right)  q.push(node->right);
+            }
+            zigzag.insert(zigzag.end(),level.begin(),level.end());
+            LefttoRight=!LefttoRight;
+        }
+    return zigzag;
+    }
