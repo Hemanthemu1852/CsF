@@ -1,0 +1,39 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wells Fargo Customer Portal</title>
+  <!-- Include your CSS stylesheets here -->
+</head>
+<body>
+  <header>
+    <h1>Welcome to Wells Fargo Portal</h1>
+    <!-- Navigation links for Account Overview, Transaction History, Fund Transfers, Secure Messaging -->
+  </header>
+
+  <main>
+    <!-- Content for different sections like Account Overview, Transaction History, etc. -->
+    <section id="account-overview">
+      <!-- Display account balances, recent transactions, etc. -->
+    </section>
+
+    <section id="transaction-history">
+      <!-- Display transaction history with dates, amounts, etc. -->
+    </section>
+
+    <section id="fund-transfers">
+      <!-- Implement fund transfer functionality with secure forms -->
+    </section>
+
+    <section id="secure-messaging">
+      <!-- Implement secure messaging using encryption and authentication -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Wells Fargo. All rights reserved.</p>
+  </footer>
+
+  <!-- Include your JavaScript scripts here for client-side interactivity -->
+</body>
+</html>
